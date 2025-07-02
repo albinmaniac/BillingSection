@@ -130,7 +130,7 @@ import dj_database_url
 DATABASES = {
     'default': dj_database_url.config(default='sqlite:///db.sqlite3')
 }
-ALLOWED_HOSTS = ['billing-system-7n6e.onrender.com']# Or use Render's domain once deployed
+ALLOWED_HOSTS = ['billing-system-7n6e.onrender.com']
 DEBUG = False
 
 # 5. Static files setup
