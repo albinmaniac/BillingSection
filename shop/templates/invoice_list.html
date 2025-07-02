@@ -1,0 +1,50 @@
+<center></center>
+    <h2>📜 All Saved Invoices</h2>
+
+    <a href="{% url 'transaction_list' %}">
+        <button>🔙 Go Back</button>
+      </a>
+      <br>
+    {% for invoice in invoices %}
+        <div style="border:1px solid #ccc; margin-bottom:20px; padding:10px; width:80%;">
+            <h3>Invoice #{{ invoice.id }} - {{ invoice.customer.name }}</h3>
+            <p><strong>Date:</strong> {{ invoice.created_at }}</p>
+            <table border="1" cellpadding="5" width="100%">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Rate</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in invoice.items.all %}
+                        <tr>
+                            <td>{{ item.phone.item }}</td>
+                            <td>{{ item.qty }}</td>
+                            <td>₹{{ item.rate }}</td>
+                            <td>₹{{ item.amount }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" align="right"><strong>Total</strong></td>
+                        <td>₹{{ invoice.total }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="right"><strong>Discount ({{ invoice.discount }}%)</strong></td>
+                        <td>- ₹{{ invoice.discount_amount }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" align="right"><strong>Grand Total</strong></td>
+                        <td><strong>₹{{ invoice.grand_total }}</strong></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    {% empty %}
+        <p>No invoices found.</p>
+    {% endfor %}
+</center>

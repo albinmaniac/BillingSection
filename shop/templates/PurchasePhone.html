@@ -1,0 +1,61 @@
+<center><h2>🛒 Billing Section</h2>
+    <h3><u>Invoice:</u></h3>
+    
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            {{ form.customer.label_tag }}  {{ form.customer }}
+            {{ form.phone.label_tag }}  {{ form.phone }}
+            {{ form.qty.label_tag }}  {{ form.qty }}
+        </p>
+        <button type="submit">Add</button>
+    </form>
+    
+    {% if cart %}
+    <h3>🧾 Invoice Summary</h3>
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Qty</th>
+                <th>Rate</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart %}
+            <tr>
+                <td>{{ item.item }}</td>
+                <td>{{ item.qty }}</td>
+                <td>₹{{ item.rate }}</td>
+                <td>₹{{ item.amount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" align="right"><strong>Total</strong></td>
+                <td>₹{{ subtotal }}</td>
+            </tr>
+            <tr>
+                <td colspan="3" align="right"><strong>Discount ({{ discount_percent }}%)</strong></td>
+                <td>- ₹{{ discount_amount }}</td>
+            </tr>
+            <tr>
+                <td colspan="3" align="right"><strong>Grand Total</strong></td>
+                <td><strong>₹{{ grand_total }}</strong></td>
+            </tr>
+        </tfoot>
+    </table>
+<br>
+<br>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" name="save_invoice">✅ Confirm & Save Invoice</button>
+    </form>
+
+{% endif %}
+<a href="{% url 'lists_invoice' %}">📁 View All Invoices</a>
+
+
+</center>
