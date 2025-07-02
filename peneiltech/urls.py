@@ -21,11 +21,13 @@ from shop import views
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('addcustomer/',views.AddCustomerView.as_view(),name="add_customer"),
+    path('', views.PurchasePhoneView.as_view(), name="home"),  # ✅ Root URL
 
-    path('addphone/',views.AddItemView.as_view(),name="add_item"),
-    
-    path('trans/',views.PurchasePhoneView.as_view(),name='transaction_list'),
+    path('addcustomer/', views.AddCustomerView.as_view(), name="add_customer"),
+
+    path('addphone/', views.AddItemView.as_view(), name="add_item"),
+
+    path('trans/', views.PurchasePhoneView.as_view(), name='transaction_list'),
 
     path("confirm/", views.InvoiceListView.as_view(), name="lists_invoice"),
 ]
