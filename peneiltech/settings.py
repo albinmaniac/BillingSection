@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-fu+vdjk_vt%q3tryn#4yj*_im9%v^=&zep#t17dd^fp1eum&*7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -122,3 +122,15 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+import os
+import dj_database_url
+
+DATABASES = {
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
+}
+ALLOWED_HOSTS = ['billing-app.onrender.com'] # Or use Render's domain once deployed
+DEBUG = False
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
